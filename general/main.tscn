@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://myv8a1ap77f2"]
+
+[ext_resource type="PackedScene" uid="uid://1ymon6pcwyo" path="res://player/Player.tscn" id="1_nn4lv"]
+[ext_resource type="Texture2D" uid="uid://qmis8emwkup3" path="res://assets/floor-1.png" id="2_lgu5j"]
+[ext_resource type="Texture2D" uid="uid://b3bxjp2cveags" path="res://assets/floor-2.png" id="3_be8xn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bjg5j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ajy8"]
+texture = ExtResource("2_lgu5j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -3.35876, 16, -3.71231, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ec2ix"]
+texture = ExtResource("3_be8xn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -3.35876, 16, -3.71231, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_4ddtu"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_bjg5j")
+sources/6 = SubResource("TileSetAtlasSource_5ajy8")
+sources/7 = SubResource("TileSetAtlasSource_ec2ix")
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_nn4lv")]
+position = Vector2(281, 173)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(669, 528)
+tile_set = SubResource("TileSet_4ddtu")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131072, 7, 0, -131071, 7, 0, -131070, 7, 0, -131069, 7, 0, -131068, 6, 0, -131064, 6, 0, -131065, 7, 0, -131066, 7, 0, -131067, 7, 0, -131061, 7, 0, -131060, 6, 0, -65537, 6, 0, -131062, 7, 0, -131063, 7, 0, -131059, 7, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(881, 447)
+zoom = Vector2(2, 2)

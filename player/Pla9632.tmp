@@ -1,0 +1,98 @@
+[gd_scene load_steps=15 format=3 uid="uid://1ymon6pcwyo"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_ptl1h"]
+[ext_resource type="Texture2D" uid="uid://b57g1y4wdr1oj" path="res://assets/slime-idle-v2.png" id="2_3mek1"]
+[ext_resource type="Script" path="res://state/StateMachine.gd" id="3_mcv1y"]
+[ext_resource type="Script" path="res://player/Idle.gd" id="4_4kqhq"]
+[ext_resource type="Script" path="res://player/Move.gd" id="5_nvkmd"]
+[ext_resource type="Script" path="res://player/Jump.gd" id="6_582go"]
+[ext_resource type="Script" path="res://player/Fall.gd" id="7_w8i47"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4t2c"]
+radius = 10.0499
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op8dt"]
+atlas = ExtResource("2_3mek1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uqyi"]
+atlas = ExtResource("2_3mek1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufogn"]
+atlas = ExtResource("2_3mek1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_simjf"]
+atlas = ExtResource("2_3mek1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwet2"]
+atlas = ExtResource("2_3mek1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fy58l"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_op8dt")
+}, {
+"duration": 2.8,
+"texture": SubResource("AtlasTexture_1uqyi")
+}, {
+"duration": 1.6,
+"texture": SubResource("AtlasTexture_ufogn")
+}, {
+"duration": 2.7,
+"texture": SubResource("AtlasTexture_simjf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwet2")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ptl1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(533, 293)
+shape = SubResource("CircleShape2D_b4t2c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(533, 296)
+sprite_frames = SubResource("SpriteFrames_fy58l")
+animation = &"move"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(579, 241)
+zoom = Vector2(2.345, 2.345)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_mcv1y")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "move_state")]
+script = ExtResource("4_4kqhq")
+jump_state = NodePath("../Jump")
+move_state = NodePath("../Move")
+animation_name = "idle"
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state")]
+script = ExtResource("5_nvkmd")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+animation_name = "move"
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("6_582go")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("7_w8i47")
