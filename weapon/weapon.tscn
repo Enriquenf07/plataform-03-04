@@ -1,0 +1,108 @@
+[gd_scene load_steps=16 format=3 uid="uid://ewga3dqb8gfq"]
+
+[ext_resource type="Script" path="res://player/MeleeAttack.gd" id="1_wik3p"]
+[ext_resource type="Script" path="res://state/StateMachine.gd" id="2_rb8kc"]
+[ext_resource type="Script" path="res://player/Disable.gd" id="3_at41v"]
+[ext_resource type="Script" path="res://player/Lt_attack.gd" id="4_s83ci"]
+[ext_resource type="Texture2D" uid="uid://bjptpvo8rroqg" path="res://assets/sword-1-Sheet.png" id="5_h4smo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n73c5"]
+size = Vector2(11, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bqlm"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y01x0"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c218"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5kvl"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkbv0"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q3gj"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v03nx"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlub5"]
+atlas = ExtResource("5_h4smo")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r271o"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"disable",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bqlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y01x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c218")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5kvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkbv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q3gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v03nx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlub5")
+}],
+"loop": false,
+"name": &"light_attack",
+"speed": 30.0
+}]
+
+[node name="Weapon" type="Area2D"]
+position = Vector2(560, 284)
+script = ExtResource("1_wik3p")
+damage = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 2.5)
+shape = SubResource("RectangleShape2D_n73c5")
+
+[node name="Melee_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_rb8kc")
+starting_state = NodePath("Disable")
+
+[node name="Disable" type="Node" parent="Melee_machine" node_paths=PackedStringArray("lt_attack_state")]
+script = ExtResource("3_at41v")
+lt_attack_state = NodePath("../Lt_attack")
+animation_name = "disable"
+
+[node name="Lt_attack" type="Node" parent="Melee_machine" node_paths=PackedStringArray("disable_state")]
+script = ExtResource("4_s83ci")
+disable_state = NodePath("../Disable")
+damage = 30.0
+animation_name = "light_attack"
+
+[node name="Weapon_animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 1)
+sprite_frames = SubResource("SpriteFrames_r271o")
+animation = &"disable"

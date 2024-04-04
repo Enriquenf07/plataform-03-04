@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://myv8a1ap77f2"]
 
-[ext_resource type="PackedScene" uid="uid://1ymon6pcwyo" path="res://player/Player.tscn" id="1_nn4lv"]
+[ext_resource type="Script" path="res://general/main.gd" id="1_yfjwe"]
 [ext_resource type="Texture2D" uid="uid://qmis8emwkup3" path="res://assets/floor-1.png" id="2_lgu5j"]
 [ext_resource type="Texture2D" uid="uid://b3bxjp2cveags" path="res://assets/floor-2.png" id="3_be8xn"]
 
@@ -30,16 +30,10 @@ sources/6 = SubResource("TileSetAtlasSource_5ajy8")
 sources/7 = SubResource("TileSetAtlasSource_ec2ix")
 
 [node name="Main" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_nn4lv")]
-position = Vector2(281, 173)
+script = ExtResource("1_yfjwe")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(669, 528)
 tile_set = SubResource("TileSet_4ddtu")
 format = 2
-layer_0/tile_data = PackedInt32Array(-131072, 7, 0, -131071, 7, 0, -131070, 7, 0, -131069, 7, 0, -131068, 6, 0, -131064, 6, 0, -131065, 7, 0, -131066, 7, 0, -131067, 7, 0, -131061, 7, 0, -131060, 6, 0, -65537, 6, 0, -131062, 7, 0, -131063, 7, 0, -131059, 7, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(881, 447)
-zoom = Vector2(2, 2)
+layer_0/tile_data = PackedInt32Array(-131072, 7, 0, -131071, 7, 0, -131070, 7, 0, -131069, 7, 0, -131068, 6, 0, -131064, 6, 0, -131065, 7, 0, -131066, 7, 0, -131067, 7, 0, -131061, 7, 0, -131060, 6, 0, -65537, 6, 0, -131062, 7, 0, -131063, 7, 0, -131059, 7, 0, -131058, 6, 0, -131057, 6, 0, -131056, 6, 0, -131055, 6, 0, -131054, 6, 0, -131053, 6, 0, -131052, 6, 0, -131051, 6, 0, -131050, 6, 0, -131049, 6, 0, -131048, 6, 0, -65538, 6, 0, -65539, 7, 0, -65540, 6, 0, -65541, 7, 0, -65542, 6, 0, -65543, 7, 0, -65544, 6, 0, -65545, 6, 0, -65546, 7, 0, -65547, 7, 0, -65548, 7, 0, -65549, 7, 0, -65550, 7, 0, -65551, 7, 0, -65552, 7, 0, -65553, 7, 0, -65554, 7, 0, -65555, 7, 0, -65556, 7, 0, -65557, 7, 0, -65558, 7, 0)

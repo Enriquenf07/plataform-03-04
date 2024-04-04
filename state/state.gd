@@ -9,7 +9,7 @@ var move_speed: float = 400
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var animations: AnimatedSprite2D
-var parent: CharacterBody2D
+var parent
 var input_handler: Input_handler
 
 func enter() -> void:

@@ -7,6 +7,8 @@ var fall_state: State
 var idle_state: State
 @export
 var move_state: State
+@export
+var dash_state: State
 
 @export
 var jump_force: float = 400.0
@@ -18,6 +20,8 @@ func enter() -> void:
 func process_input(event: InputEvent) -> State:
 	if input_handler.double_jump():
 		return self
+	if input_handler.dash():
+		return dash_state
 	return null
 
 func process_physics(delta: float) -> State:
@@ -27,9 +31,9 @@ func process_physics(delta: float) -> State:
 		return fall_state
 	
 	var movement = Input.get_axis('move_left', 'move_right') * move_speed
-	
+	input_handler.change_direction(movement)
 	if movement != 0:
-		animations.flip_h = movement > 0
+		parent.change_sprite_direction(movement)
 	parent.velocity.x = movement
 	parent.move_and_slide()
 	
