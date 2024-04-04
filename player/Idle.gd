@@ -6,6 +6,8 @@ var jump_state: State
 var move_state: State
 @export
 var dash_state: State
+@export
+var dash_clone_state: State
 
 func enter() -> void:
 	super()
@@ -16,6 +18,8 @@ func enter() -> void:
 func process_input(event: InputEvent) -> State:
 	if input_handler.dash():
 		return dash_state
+	if input_handler.dashClone():
+		return dash_clone_state
 	if Input.get_axis('move_left', 'move_right'): 
 		return move_state
 	if input_handler.jump() and parent.is_on_floor():

@@ -3,6 +3,7 @@ extends Node
 
 var double_jump_is_enable: bool = true
 var dash_is_enable: bool = true
+var dash_clone_is_enable: bool = true
 var last_direction = 'left'
 
 func jump():
@@ -23,5 +24,11 @@ func change_direction(movement):
 func dash():
 	if dash_is_enable and Input.is_action_just_pressed("dash"):
 		dash_is_enable = false
+		return true 
+	return false
+	
+func dashClone():
+	if dash_clone_is_enable and Input.is_action_just_pressed("dash_clone"):
+		dash_clone_is_enable = false
 		return true 
 	return false

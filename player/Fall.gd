@@ -8,12 +8,16 @@ var move_state: State
 var jump_state: State
 @export
 var dash_state: State
+@export
+var dash_clone_state: State
 
 func process_input(event: InputEvent) -> State:
 	if input_handler.double_jump():
 		return jump_state
 	if input_handler.dash():
 		return dash_state
+	if input_handler.dashClone():
+		return dash_clone_state
 	return null
 
 func process_physics(delta: float) -> State:

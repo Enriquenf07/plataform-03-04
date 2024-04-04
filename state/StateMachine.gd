@@ -14,7 +14,6 @@ func init(parent, animations: AnimatedSprite2D, input_handler: Input_handler) ->
 		child.animations = animations
 		child.input_handler = input_handler
 
-	# Initialize to the default state
 	change_state(starting_state)
 
 # Change to the new state by first calling any exit logic on the current state.

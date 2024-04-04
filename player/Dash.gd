@@ -1,4 +1,5 @@
 extends State
+class_name Dash
 
 @export
 var dash_power : int

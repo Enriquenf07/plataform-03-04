@@ -9,6 +9,8 @@ var idle_state: State
 var move_state: State
 @export
 var dash_state: State
+@export
+var dash_clone_state: State
 
 @export
 var jump_force: float = 400.0
@@ -22,6 +24,8 @@ func process_input(event: InputEvent) -> State:
 		return self
 	if input_handler.dash():
 		return dash_state
+	if input_handler.dashClone():
+		return dash_clone_state
 	return null
 
 func process_physics(delta: float) -> State:

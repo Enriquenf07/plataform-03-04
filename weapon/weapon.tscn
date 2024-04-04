@@ -105,4 +105,4 @@ animation_name = "light_attack"
 [node name="Weapon_animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, 1)
 sprite_frames = SubResource("SpriteFrames_r271o")
-animation = &"disable"
+animation = &"light_attack"

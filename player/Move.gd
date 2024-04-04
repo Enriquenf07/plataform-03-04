@@ -8,6 +8,8 @@ var jump_state: State
 var fall_state: State
 @export
 var dash_state: State
+@export
+var dash_clone_state: State
 
 func enter():
 	super()
@@ -22,7 +24,8 @@ func process_physics(delta: float) -> State:
 		return jump_state
 	if input_handler.dash():
 		return dash_state
-		
+	if input_handler.dashClone():
+		return dash_clone_state
 	parent.velocity.y += gravity * delta
 
 	var movement = Input.get_axis('move_left', 'move_right') * move_speed

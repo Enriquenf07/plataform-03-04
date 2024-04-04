@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://jsy6tvs20g6o"]
+
+[ext_resource type="Script" path="res://Clone.gd" id="1_jvi7f"]
+[ext_resource type="Script" path="res://state/StateMachine.gd" id="2_k2m3s"]
+[ext_resource type="Script" path="res://Idle.gd" id="3_wkvur"]
+[ext_resource type="Texture2D" uid="uid://ddfw33mq12h1l" path="res://assets/slimeInitial.png" id="4_3y12h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xaapi"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1yxpj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3y12h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Clone" type="CharacterBody2D"]
+script = ExtResource("1_jvi7f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xaapi")
+
+[node name="State_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_k2m3s")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State_machine"]
+script = ExtResource("3_wkvur")
+animation_name = "default"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1yxpj")
