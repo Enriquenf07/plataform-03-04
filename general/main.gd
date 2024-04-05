@@ -32,4 +32,3 @@ func _process(delta):
 		var instance = skeletonScene.instantiate()
 		instance.position = Vector2(800, 463)
 		add_child(instance)
-		print(instance)

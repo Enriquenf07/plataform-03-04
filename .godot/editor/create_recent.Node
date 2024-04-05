@@ -1,9 +1,10 @@
-CharacterBody2D
-Node
-AnimatedSprite2D
-State_machine
-CollisionShape2D
 Area2D
+AnimatedSprite2D
+CollisionShape2D
+StaticBody2D
+Node
+CharacterBody2D
+State_machine
 State
 Dash
 Camera2D

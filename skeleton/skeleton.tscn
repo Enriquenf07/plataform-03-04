@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5oih6nm07yec"]
+[gd_scene load_steps=12 format=3 uid="uid://c5oih6nm07yec"]
 
 [ext_resource type="Script" path="res://skeleton/skeleton.gd" id="1_mr8nh"]
 [ext_resource type="Texture2D" uid="uid://dfbr1x1xgsv87" path="res://assets/skeleton-01.png" id="2_q02cs"]
@@ -7,8 +7,11 @@
 [ext_resource type="Script" path="res://skeleton/Idle.gd" id="4_n4cyo"]
 [ext_resource type="Script" path="res://skeleton/OnHit.gd" id="5_6c5fv"]
 [ext_resource type="Script" path="res://skeleton/Fall.gd" id="6_iar6p"]
+[ext_resource type="Script" path="res://skeleton/Move.gd" id="7_j1vcn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pedf"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_48p86"]
+radius = 6.0
+height = 18.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ap5c2"]
 atlas = ExtResource("2_q02cs")
@@ -26,21 +29,26 @@ animations = [{
 }]
 
 [node name="Skeleton" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_mr8nh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3pedf")
+shape = SubResource("CapsuleShape2D_48p86")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.96875, 1)
 sprite_frames = SubResource("SpriteFrames_7eg1e")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_o0wop")
-starting_state = NodePath("Idle")
+starting_state = NodePath("Move")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_hit_state")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_hit_state", "move_state")]
 script = ExtResource("4_n4cyo")
 on_hit_state = NodePath("../OnHit")
+move_state = NodePath("../Move")
 
 [node name="OnHit" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_6c5fv")
@@ -48,6 +56,10 @@ idle_state = NodePath("../Idle")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_iar6p")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("7_j1vcn")
+move_speed = 200.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_jq0vj")

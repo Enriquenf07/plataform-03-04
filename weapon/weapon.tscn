@@ -80,6 +80,8 @@ animations = [{
 
 [node name="Weapon" type="Area2D"]
 position = Vector2(560, 284)
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_wik3p")
 damage = 30.0
 

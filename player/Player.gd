@@ -49,7 +49,8 @@ func _physics_process(delta: float) -> void:
 	if timer != null and timer.time_left == 0:
 		input_handler.dash_clone_is_enable = true
 		timer.free()
-		clone.free()
+		if clone != null:
+			clone.free()
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
