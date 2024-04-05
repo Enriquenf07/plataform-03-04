@@ -18,6 +18,12 @@ func process_physics(delta: float) -> State:
 		acceleration *= -1
 	if parent.is_on_floor() and +parent.velocity.x <= +move_speed:
 		parent.velocity.x += acceleration if acceleration * actual_velocity > 0 else acceleration * 10
+	for index in range(parent.get_slide_collision_count()):
+		var collision = parent.get_slide_collision(index)
+		var body = collision.get_collider()
+		if body is CharacterBody2D:
+			if body.has_method('explode'):
+				body.explode()
 	time += delta
 	parent.move_and_slide()
 	return null

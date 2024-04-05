@@ -6,5 +6,5 @@ func enter():
 	explosion.damage = 500
 	explosion.position = parent.global_position
 	parent.add_sibling(explosion)
-	parent.free()
+	parent.queue_free()
 	

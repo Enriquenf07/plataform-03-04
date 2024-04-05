@@ -4,10 +4,15 @@ extends CharacterBody2D
 var animations: AnimatedSprite2D = $AnimatedSprite2D
 
 @onready
-var state_machine: Node = $State_machine
+var state_machine: State_machine = $State_machine
 
 @onready
 var explosionScene = preload('res://utils/explosion.tscn')
+@export
+var explode_state: State
+
+func explode():
+	state_machine.change_state(explode_state)
 
 func change_sprite_direction(movement):
 	animations.flip_h = movement > 0

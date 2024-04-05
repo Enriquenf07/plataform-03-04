@@ -20,7 +20,6 @@ func init(parent, animations: AnimatedSprite2D, input_handler: Input_handler) ->
 func change_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
-
 	current_state = new_state
 	current_state.enter()
 	
