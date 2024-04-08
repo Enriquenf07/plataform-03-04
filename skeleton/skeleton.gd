@@ -18,6 +18,9 @@ var health: IHealth = $Health
 @onready
 var on_hit_state: State = $StateMachine/OnHit
 
+@export
+var damage: float
+
 
 func hit(damage, direction):
 	on_hit_state.damage = damage

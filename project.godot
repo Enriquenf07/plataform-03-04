@@ -16,6 +16,14 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.815686, 0.878431, 0.631373, 1)
 config/icon="res://assets/slimeInitial.png"
 
+[autoload]
+
+GameState="*res://game_state.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 move_left={

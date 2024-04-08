@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://1ymon6pcwyo"]
+[gd_scene load_steps=21 format=3 uid="uid://1ymon6pcwyo"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_ptl1h"]
 [ext_resource type="Texture2D" uid="uid://b57g1y4wdr1oj" path="res://assets/slime-idle-v2.png" id="2_3mek1"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ewga3dqb8gfq" path="res://weapon/weapon.tscn" id="10_35mp6"]
 [ext_resource type="Script" path="res://player/DashClone.gd" id="10_w5b20"]
 [ext_resource type="Script" path="res://player/Health.gd" id="11_ao5g6"]
+[ext_resource type="PackedScene" uid="uid://c7ilmcmoyw2tm" path="res://labels/hud.tscn" id="13_m63dh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b4t2c"]
 radius = 10.0499
@@ -72,11 +73,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_state") groups=["player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_ptl1h")
 double_dash_cooldown = 7
+jump_state = NodePath("StateMachine/Jump")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1)
@@ -150,10 +152,16 @@ jump_state = NodePath("../Jump")
 position = Vector2(-22, -16)
 
 [node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("11_ao5g6")
+value = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(68, -20)
 zoom = Vector2(2, 2)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="Hud" parent="." instance=ExtResource("13_m63dh")]
+unique_name_in_owner = true

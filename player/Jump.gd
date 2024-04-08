@@ -15,9 +15,14 @@ var dash_clone_state: State
 @export
 var jump_force: float = 400.0
 
+var comeback
+
 func enter() -> void:
 	super()
 	parent.velocity.y = -jump_force
+	
+func exit():
+	comeback = null
 	
 func process_input(event: InputEvent) -> State:
 	if input_handler.double_jump():
@@ -38,6 +43,10 @@ func process_physics(delta: float) -> State:
 	input_handler.change_direction(movement)
 	if movement != 0:
 		parent.change_sprite_direction(movement)
+	if comeback:
+		parent.velocity.x = 200 * comeback
+		parent.move_and_slide()
+		return
 	parent.velocity.x = movement
 	parent.move_and_slide()
 	

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dajw4ow08uduy"]
+
+[ext_resource type="Script" path="res://LifeObject.gd" id="1_m88ha"]
+[ext_resource type="Texture2D" uid="uid://dykv78r0j66sf" path="res://assets/life.png" id="2_wcm33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_une0p"]
+radius = 16.1245
+
+[node name="LifeObject" type="CharacterBody2D" groups=["objects"]]
+scale = Vector2(0.340304, 0.340304)
+script = ExtResource("1_m88ha")
+power = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wcm33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_une0p")

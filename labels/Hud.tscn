@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ilmcmoyw2tm"]
+
+[ext_resource type="Script" path="res://labels/KillCount.gd" id="1_6qmfp"]
+[ext_resource type="Script" path="res://labels/Hud.gd" id="1_xw8m6"]
+[ext_resource type="Script" path="res://labels/PlayerHealth.gd" id="2_0jxd2"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_xw8m6")
+
+[node name="KillCount" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "ewa"
+script = ExtResource("1_6qmfp")
+
+[node name="PlayerHealth" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 986.0
+offset_right = 1150.0
+offset_bottom = 23.0
+horizontal_alignment = 2
+script = ExtResource("2_0jxd2")

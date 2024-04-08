@@ -24,6 +24,9 @@ func process_physics(delta: float) -> State:
 		if body is CharacterBody2D:
 			if body.has_method('explode'):
 				body.explode()
+			if body.has_method('hit') and body.is_in_group('player'):
+				var flip_h = animations.flip_h
+				body.hit(parent.damage, 1 if parent.velocity.x > 0 else -1)
 	time += delta
 	parent.move_and_slide()
 	return null
